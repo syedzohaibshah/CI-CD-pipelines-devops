@@ -10,4 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: cat firstfile.txt
+      - run: date
+    steps:
+      - run : echo "The current branch is ${{ github.ref_name }}"
 ...
