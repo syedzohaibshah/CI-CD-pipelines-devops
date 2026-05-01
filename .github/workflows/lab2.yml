@@ -6,10 +6,10 @@ run-name: ${{ github.actor  }} has triggered this workflow using ${{ github.even
 on:
   push:
     branches:
-      -main 
+      - main 
   pull_request:
     branches: 
-      -main 
+      - main 
 
 jobs:
   first-job:
