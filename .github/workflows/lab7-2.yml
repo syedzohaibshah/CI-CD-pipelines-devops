@@ -1,0 +1,43 @@
+---
+name: "Lab 7 PArt 2 -Nodejs project"
+
+run-name: |
+      "lab 7  workflow with devops class triggered by ${{github.actor}}
+      with ${{github.event_name}} event
+      on branch ${{github.repository}}"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  first-job:
+    if: ${{ github.event_name == 'workflow_dispatch'  }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out to a repository
+        uses: actions/checkout@v4
+      - name: Printing the content of the file
+        run: cat firstfile.txt
+      - uses: bahmutov/npm-install@v1  
+      - name: run and build
+        run: npm run build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: build-output
+          path: dist/
+  second-job:
+      needs: first-job
+      runs-on: ubuntu-latest
+      steps:
+        - name: downloading artifact
+          uses: actions/download-artifact@v8
+          with:
+            name: build-output
+        - name: List files
+          run: ls -R
+
+        - name: Display file content
+          run: cat dist/index.js
+
+
+...
