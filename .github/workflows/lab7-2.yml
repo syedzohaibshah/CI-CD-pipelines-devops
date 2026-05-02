@@ -38,7 +38,7 @@ jobs:
           run: ls -R
 
         - name: Display file content
-          run: cat dist/index.js
+          run: cat index.js
 
 
 ...
